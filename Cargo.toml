@@ -1,6 +1,6 @@
 [package]
 name = "moreops"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Konstantin Stepanov <me@kstep.me>"]
 license = "MIT"
 description = "a set of simple useful additional methods"
