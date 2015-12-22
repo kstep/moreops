@@ -1,3 +1,22 @@
+//! # A set of useful simple additional methods
+//!
+//! Examples:
+//!
+//! ```rust
+//! use moreops::*;
+//!
+//! // Simple wrapping into Option
+//! let some_num = 123.some();
+//! let none_num = none::<i32>();
+//!
+//! // Simple wrapping into Result
+//! let ok = 123.ok();
+//! let err = "Error!".to_owned().err();
+//!
+//! // If-like operations with Option
+//! let x = 42;
+//! let answer = (x % 2 == 0).option("even").unwrap_or("odd");
+//! ```
 
 pub trait OptionOps {
     fn some(self) -> Option<Self> where Self: Sized {
