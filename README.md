@@ -1,5 +1,7 @@
 moreops
 =======
+[![license](http://img.shields.io/crates/l/moreops.png)](https://crates.io/crates/moreops)
+[![version](http://img.shields.io/crates/v/moreops.png)](https://crates.io/crates/moreops)
 
 A set of useful simple additional methods
 
