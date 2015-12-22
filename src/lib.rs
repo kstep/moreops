@@ -11,6 +11,18 @@ pub fn none<T>() -> Option<T> {
     None
 }
 
+pub trait ResultOps<T = ()> {
+    fn ok(self) -> Result<Self, T> where Self: Sized {
+        Ok(self)
+    }
+
+    fn err(self) -> Result<T, Self> where Self: Sized {
+        Err(self)
+    }
+}
+
+impl<T> ResultOps for T {}
+
 pub trait BoolOps {
     fn option<T>(self, x: T) -> Option<T>;
 }
