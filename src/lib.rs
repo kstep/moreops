@@ -27,6 +27,11 @@
 //! // Swap result
 //! assert_eq!(123.ok().swap(), 123.err());
 //! assert_eq!(123.ok().swap().swap(), 123.ok());
+//!
+//! // Wrap into tuple
+//! let one = 123.once();
+//! let two = 123.twice();
+//! let three = 123.thrice();
 //! ```
 
 pub trait OptionOps {
@@ -80,6 +85,22 @@ pub trait TapOps {
 
 impl<T> TapOps for T {}
 
+pub trait TupleOps: Sized {
+    fn once(self) -> (Self,) {
+        (self,)
+    }
+
+    fn twice(self) -> (Self, Self) where Self: Clone {
+        (self.clone(), self)
+    }
+
+    fn thrice(self) -> (Self, Self, Self) where Self: Clone {
+        (self.clone(), self.clone(), self)
+    }
+}
+
+impl<T> TupleOps for T {}
+
 pub trait ResultExt<T, E>: Sized {
     fn swap(self) -> Result<E, T>;
 }
@@ -107,4 +128,8 @@ fn it_works() {
     }), 1);
 
     assert_eq!(123.ok().swap(), 123.err());
+
+    assert_eq!(123.once(), (123,));
+    assert_eq!(123.twice(), (123, 123));
+    assert_eq!(123.thrice(), (123, 123, 123));
 }
