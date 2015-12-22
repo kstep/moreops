@@ -16,6 +16,13 @@
 //! // If-like operations with Option
 //! let x = 42;
 //! let answer = (x % 2 == 0).option("even").unwrap_or("odd");
+//!
+//! // Tap into some result (like `<|` and `|>` operators from Scalaz)
+//! fn f() -> i32 {
+//!     123
+//! }
+//! assert_eq!(f().tap(|x| println!("{:?}", x)), 123);
+//! assert_eq!(f().then(|x| x * 2), 246);
 //! ```
 
 pub trait OptionOps {
@@ -60,6 +67,10 @@ pub trait TapOps {
     fn tap<R, F: Fn(&Self) -> R>(self, f: F) -> Self where Self: Sized {
         let _ = f(&self);
         self
+    }
+
+    fn then<R, F: FnOnce(Self) -> R>(self, f: F) -> R where Self: Sized {
+        f(self)
     }
 }
 
