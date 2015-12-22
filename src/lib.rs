@@ -25,6 +25,15 @@ impl BoolOps for bool {
     }   
 }
 
+pub trait TapOps {
+    fn tap<R, F: Fn(&Self) -> R>(self, f: F) -> Self where Self: Sized {
+        let _ = f(&self);
+        self
+    }
+}
+
+impl<T> TapOps for T {}
+
 #[test]
 fn it_works() {
     assert_eq!(1.some(), Some(1));
@@ -32,4 +41,9 @@ fn it_works() {
 
     assert_eq!(true.option(1), Some(1));
     assert_eq!(false.option(1), None);
+
+    assert_eq!(1.tap(|&n| {
+        assert_eq!(n, 1);
+        2
+    }), 1);
 }
