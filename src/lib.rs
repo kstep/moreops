@@ -23,6 +23,10 @@
 //! }
 //! assert_eq!(f().tap(|x| println!("{:?}", x)), 123);
 //! assert_eq!(f().then(|x| x * 2), 246);
+//!
+//! // Swap result
+//! assert_eq!(123.ok().swap(), 123.err());
+//! assert_eq!(123.ok().swap().swap(), 123.ok());
 //! ```
 
 pub trait OptionOps {
@@ -76,6 +80,19 @@ pub trait TapOps {
 
 impl<T> TapOps for T {}
 
+pub trait ResultExt<T, E>: Sized {
+    fn swap(self) -> Result<E, T>;
+}
+
+impl<T, E> ResultExt<T, E> for Result<T, E> {
+    fn swap(self) -> Result<E, T> {
+        match self {
+            Ok(v) => Err(v),
+            Err(e) => Ok(e),
+        }
+    }
+}
+
 #[test]
 fn it_works() {
     assert_eq!(1.some(), Some(1));
@@ -88,4 +105,6 @@ fn it_works() {
         assert_eq!(n, 1);
         2
     }), 1);
+
+    assert_eq!(123.ok().swap(), 123.err());
 }
