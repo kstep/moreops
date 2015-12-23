@@ -105,6 +105,10 @@ pub trait TupleOps: Sized {
 
 impl<T> TupleOps for T {}
 
+pub fn once<A>(a: A) -> (A,) { (a,) }
+pub fn twice<A: Clone>(a: A) -> (A, A) { (a.clone(), a) }
+pub fn thrice<A: Clone>(a: A) -> (A, A, A) { (a.clone(), a.clone(), a) }
+
 pub trait ResultExt<T, E>: Sized {
     fn swap(self) -> Result<E, T>;
 }
