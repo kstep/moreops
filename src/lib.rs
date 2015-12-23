@@ -36,6 +36,9 @@
 //! // Apply functions to tuples of args directly
 //! let x = (2, 3, 4).apply(|a, b, c| a * b * c);
 //! assert_eq!(x, 24);
+//!
+//! // Use twice() to build map
+//! let map = (1..10).map(twice).collect::<::std::collections::BTreeMap<_, _>>();
 //! ```
 
 pub trait OptionOps {
