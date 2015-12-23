@@ -34,7 +34,7 @@ fn f() -> i32 {
     123
 }
 assert_eq!(f().tap(|x| println!("{:?}", x)), 123);
-assert_eq!(f().then(|x| x * 2), 246);
+assert_eq!(f().pipe(|x| x * 2), 246);
 
 // Swap result
 assert_eq!(123.ok().swap(), 123.err());

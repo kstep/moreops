@@ -22,7 +22,7 @@
 //!     123
 //! }
 //! assert_eq!(f().tap(|x| println!("{:?}", x)), 123);
-//! assert_eq!(f().then(|x| x * 2), 246);
+//! assert_eq!(f().pipe(|x| x * 2), 246);
 //!
 //! // Swap result
 //! assert_eq!(123.ok().swap(), 123.err());
@@ -85,7 +85,7 @@ pub trait TapOps {
         self
     }
 
-    fn then<R, F: FnOnce(Self) -> R>(self, f: F) -> R where Self: Sized {
+    fn pipe<R, F: FnOnce(Self) -> R>(self, f: F) -> R where Self: Sized {
         f(self)
     }
 }
