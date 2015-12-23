@@ -39,4 +39,8 @@ assert_eq!(f().then(|x| x * 2), 246);
 // Swap result
 assert_eq!(123.ok().swap(), 123.err());
 assert_eq!(123.ok().swap().swap(), 123.ok());
+
+// Apply functions to tuples of args directly
+let x = (2, 3, 4).apply(|a, b, c| a * b * c);
+assert_eq!(x, 24);
 ```
