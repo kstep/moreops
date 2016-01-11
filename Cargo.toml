@@ -2,7 +2,7 @@
 name = "moreops"
 version = "0.4.0"
 authors = ["Konstantin Stepanov <me@kstep.me>"]
-license = "MIT"
+license = "MIT OR Apache-2.0"
 description = "a set of simple useful additional methods"
 repository = "https://github.com/kstep/moreops"
 readme = "README.md"
